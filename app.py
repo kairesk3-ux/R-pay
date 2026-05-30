@@ -1,7 +1,7 @@
 ﻿from flask import Flask, render_template, request, redirect, url_for, session
 import uuid
 
-app = Flask(_name_)
+app = Flask(__name__)
 app.secret_key = 'final_stable_key_2026'
 
 # Dummy Database
@@ -47,5 +47,5 @@ def deposit(): return render_template('deposit.html', orders=orders_db)
 @app.route('/profile')
 def profile(): return render_template('profile.html')
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
