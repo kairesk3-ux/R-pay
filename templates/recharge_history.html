@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Recharge History</title>
-    <style>
-        body { font-family: sans-serif; background: #f9f9f9; padding: 20px; max-width: 500px; margin: auto; }
-        .card { background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid #eee; display: flex; justify-content: space-between; }
-    </style>
-</head>
-<body>
-    <h2>Recharge History</h2>
-    <div class="card">
-        <div><strong>₹500.00</strong><br><small>2026-05-28</small></div>
-        <div style="color: green;">Success</div>
-    </div>
-    <div class="card">
-        <div><strong>₹200.00</strong><br><small>2026-05-25</small></div>
-        <div style="color: orange;">Pending</div>
-    </div>
-    <a href="/profile">Back to Profile</a>
-</body>
-</html>
+<div class="filters">
+    <button onclick="filter('all')">All</button>
+    <button onclick="filter('pending')">Pending</button>
+    <button onclick="filter('success')">Success</button>
+    <button onclick="filter('cancel')">Cancel</button>
+</div>

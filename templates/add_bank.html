@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #f4f4f4; padding: 20px; font-family: sans-serif; }
+        .form-box { background: white; padding: 20px; border-radius: 15px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .submit-btn { background: #1a1a1a; color: white; width: 100%; padding: 15px; border-radius: 10px; border: none; }
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <h3>Add Bank Account</h3>
+        <form action="/save_bank" method="POST">
+            <input type="text" name="bank_name" placeholder="BANK Name" required>
+            <input type="text" name="acc_no" placeholder="ACCOUNT Number" required>
+            <input type="text" name="confirm_acc" placeholder="Confirm account number" required>
+            <input type="text" name="ifsc" placeholder="IFSC Code" required>
+            <input type="text" name="holder" placeholder="HOLDER Name" required>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

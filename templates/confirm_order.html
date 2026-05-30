@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #0a0f1d; color: white; padding: 20px; font-family: sans-serif; }
+        .box { background: #16213e; padding: 20px; border-radius: 10px; border: 1px solid #00f2ff; }
+        .bank-details { background: #00f2ff; color: #0a0f1d; padding: 15px; border-radius: 10px; margin: 15px 0; font-weight: bold; }
+        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; border-radius: 5px; border: none; }
+        button { background: #00f2ff; color: #0a0f1d; width: 100%; padding: 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .copy-btn { background: #ffffff; padding: 2px 8px; font-size: 12px; cursor: pointer; border-radius: 4px; border: 1px solid #000; margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h3>Confirm Order</h3>
+        <p>Amount: <strong>₹{{ amount }}</strong></p>
+
+        <div class="bank-details">
+            <p>Bank: <span id="bankName">State Bank of India</span></p>
+            <p>Account: <span id="accName">R Pay Solutions</span></p>
+            <p>A/c: <span id="accNum">987654321098</span> <button class="copy-btn" onclick="copyText('accNum')">Copy</button></p>
+            <p>IFSC: <span id="ifscCode">SBIN0012345</span> <button class="copy-btn" onclick="copyText('ifscCode')">Copy</button></p>
+        </div>
+
+        <form action="/submit_proof" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="amount" value="{{ amount }}">
+            <input type="text" name="utr" placeholder="Enter Transaction ID / UTR" required>
+            <input type="file" name="screenshot" required>
+            <button type="submit">Submit Order & Screenshot</button>
+        </form>
+    </div>
+
+    <script>
+        function copyText(id) {
+            var text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text);
+            alert("Copied: " + text);
+        }
+    </script>
+</body>
+</html>

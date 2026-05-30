@@ -1,29 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Token History</title>
     <style>
-        body { font-family: sans-serif; background: #f9f9f9; padding: 20px; max-width: 500px; margin: auto; }
-        .header { display: flex; align-items: center; margin-bottom: 20px; }
-        .card { background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid #eee; display: flex; justify-content: space-between; }
-        .status-win { color: green; font-weight: bold; }
-        .status-lose { color: red; font-weight: bold; }
+        body { background: #0a0f1d; color: white; font-family: sans-serif; padding: 20px; }
+        .tabs { display: flex; justify-content: space-between; margin-bottom: 20px; background: #16213e; padding: 5px; border-radius: 10px; }
+        .tab-btn { padding: 8px 12px; cursor: pointer; border-radius: 8px; border: none; background: transparent; color: white; transition: 0.3s; }
+        .tab-btn.active { background: #00f2ff; color: #0a0f1d; font-weight: bold; }
+        .record { background: #1a2a4a; padding: 15px; margin-bottom: 10px; border-radius: 10px; border-left: 4px solid #00f2ff; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <a href="/profile" style="margin-right: 15px; text-decoration: none;">← Back</a>
-        <h2>Token History</h2>
+    <h2>Token History</h2>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="filterRecords('all', this)">All</button>
+        <button class="tab-btn" onclick="filterRecords('receive', this)">Receive</button>
+        <button class="tab-btn" onclick="filterRecords('commission', this)">Commission</button>
+        <button class="tab-btn" onclick="filterRecords('recharge', this)">Recharge</button>
     </div>
 
-    <div class="card">
-        <div><strong>Token #1021</strong><br><small>May 28, 2026</small></div>
-        <div class="status-win">+ ₹500</div>
+    <div id="history-list">
+        <div class="record" data-type="recharge">Recharge: ₹200 | Status: Success</div>
+        <div class="record" data-type="receive">Receive: ₹500 | Status: Success</div>
+        <div class="record" data-type="commission">Commission: +₹8 | Status: Success</div>
+        <div class="record" data-type="recharge">Recharge: ₹1000 | Status: Success</div>
     </div>
-    <div class="card">
-        <div><strong>Token #1020</strong><br><small>May 27, 2026</small></div>
-        <div class="status-lose">- ₹200</div>
-    </div>
+
+    <script>
+        function filterRecords(type, btn) {
+            // Button active state logic
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filtering logic
+            const records = document.querySelectorAll('.record');
+            records.forEach(rec => {
+                if (type === 'all' || rec.getAttribute('data-type') === type) {
+                    rec.classList.remove('hidden');
+                } else {
+                    rec.classList.add('hidden');
+                }
+            });
+        }
+    </script>
 </body>
 </html>

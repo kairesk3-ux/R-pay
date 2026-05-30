@@ -1,37 +1,37 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deposit Orders</title>
     <style>
-        body { font-family: sans-serif; background: #ffffff; padding: 20px; color: #000; }
-        .order-card { padding: 15px; margin-bottom: 20px; border: 1px solid #e5e7eb; border-radius: 10px; text-align: right; }
-        .amount-text { font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; }
-        .details-text { font-size: 0.9rem; color: #374151; margin-bottom: 12px; }
-        .buy-btn { 
-            padding: 8px 20px; 
-            background: #1e40af; 
-            color: white; 
-            border: none; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 0.9rem;
-        }
+        body { background: #0a0f1d; color: white; padding: 20px; font-family: sans-serif; }
+        
+        /* Header section for title and refresh button */
+        .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        /* Small button for refresh */
+        .refresh-btn { background: #555; color: white; border: none; padding: 5px 12px; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        
+        .order-card { background: #16213e; padding: 15px; border-radius: 15px; border: 1px solid #00f2ff; margin-bottom: 15px; }
+        
+        /* Smaller, compact Buy button */
+        .buy-btn { background: #00f2ff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; color: #0a0f1d; text-decoration: none; display: inline-block; }
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">Deposit Orders</h2>
 
-    {% for order in orders %}
-    <div class="order-card">
-        <div class="amount-text">ORDER: ₹{{ order.amount }}</div>
-        <div class="details-text">Seller: {{ order.seller }} | Bank: {{ order.bank }}</div>
-        <button class="buy-btn" onclick="window.location.href='{{ url_for('payment_confirm', order_id=order.id) }}'">
-            Buy Order
-        </button>
+    <div class="header-container">
+        <h2>Deposit Orders</h2>
+        <button class="refresh-btn" onclick="location.reload()">🔄 Refresh</button>
     </div>
-    {% endfor %}
-    </body>
+
+    <div class="order-card">
+        <p>ORDER: ₹200.00 | Income: ₹8 (4%)</p>
+        <a href="/confirm_order/200" class="buy-btn">Buy Order</a>
+    </div>
+
+    <div class="order-card">
+        <p>ORDER: ₹8000.00 | Income: ₹320 (4%)</p>
+        <a href="/confirm_order/8000" class="buy-btn">Buy Order</a>
+    </div>
+
+</body>
 </html>
