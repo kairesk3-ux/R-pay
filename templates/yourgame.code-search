@@ -1,0 +1,9 @@
+# Query: yourgame
+# ContextLines: 1
+
+1 result - 1 file
+
+templates\my_team.html:
+  21      <div class="copy-box">
+  22:         <span id="refLink" style="font-size: 0.8rem;">https://yourgame.com/register?ref=20034520</span>
+  23          <button onclick="copyToClipboard()">Copy</button>
