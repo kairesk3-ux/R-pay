@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Orders</title>
+    <style>
+        body { font-family: sans-serif; background: #ffffff; padding: 20px; color: #000; }
+        .order-card { padding: 15px; margin-bottom: 20px; border: 1px solid #e5e7eb; border-radius: 10px; text-align: right; }
+        .amount-text { font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; }
+        .details-text { font-size: 0.9rem; color: #374151; margin-bottom: 12px; }
+        .buy-btn { 
+            padding: 8px 20px; 
+            background: #1e40af; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Deposit Orders</h2>
+
+    {% for order in orders %}
+    <div class="order-card">
+        <div class="amount-text">ORDER: ₹{{ order.amount }}</div>
+        <div class="details-text">Seller: {{ order.seller }} | Bank: {{ order.bank }}</div>
+        <button class="buy-btn" onclick="window.location.href='{{ url_for('payment_confirm', order_id=order.id) }}'">
+            Buy Order
+        </button>
+    </div>
+    {% endfor %}
+    </body>
+</html>

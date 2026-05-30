@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body { font-family: sans-serif; background: #f9f9f9; padding: 20px; color: #333; max-width: 500px; margin: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .balance-card { background: white; padding: 20px; border-radius: 15px; border: 1px solid #ddd; margin-bottom: 20px; text-align: left; }
+        .balance-val { font-size: 1.8rem; font-weight: bold; margin: 10px 0; }
+        .top-up-btn { background: #111; color: white; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
+        .menu-container { display: flex; flex-direction: column; width: 100%; }
+        .menu-item { 
+            background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; 
+            display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid #eee; text-decoration: none; color: #333; text-align: left;
+        }
+        .icon-num { background: #eef; color: #33a; padding: 5px 10px; border-radius: 50%; font-weight: bold; margin-right: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2>Profile</h2>
+        <span>ID: 1</span>
+    </div>
+
+    <div class="balance-card">
+        <small>Available Balance</small>
+        <div class="balance-val">₹1,00,000.00</div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <small>Active quota pending: ₹5000.00</small>
+            <a href="{{ url_for('deposit') }}" class="top-up-btn">Top Up</a>
+        </div>
+    </div>
+
+    <div class="menu-container">
+        <a href="{{ url_for('recharge_history') }}" class="menu-item"><span class="icon-num">1</span> Recharge History <span>></span></a>
+        <a href="{{ url_for('token_history') }}" class="menu-item"><span class="icon-num">2</span> Token History <span>></span></a>
+        <a href="{{ url_for('bank_account') }}" class="menu-item"><span class="icon-num">3</span> Link Bank Account <span>></span></a>
+        <a href="{{ url_for('edit_profile') }}" class="menu-item"><span class="icon-num">4</span> Edit Profile <span>></span></a>
+        <a href="https://t.me/RpayvipChannel" target="_blank" class="menu-item"><span class="icon-num">5</span> Contact us <span>></span></a>
+        <a href="{{ url_for('my_team') }}" class="menu-item"><span class="icon-num">6</span> My Team <span>></span></a>
+        <a href="{{ url_for('logout') }}" class="menu-item"><span class="icon-num">7</span> Sign out <span>></span></a>
+    </div>
+
+</body>
+</html>

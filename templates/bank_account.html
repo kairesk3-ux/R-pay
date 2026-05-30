@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bank Management</title>
+    <style>
+        body { font-family: sans-serif; background: #f8fafc; padding: 20px; padding-bottom: 90px; }
+        .card { background: #fff; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
+        .title { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; }
+        .input-field { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #cbd5e1; box-sizing: border-box; }
+        .button { width: 100%; padding: 14px; background: #111827; color: #fff; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
+        .bank-item { background: #fff; padding: 15px; border-radius: 15px; margin-bottom: 10px; border: 1px solid #e2e8f0; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 15px 0; border-top: 1px solid #ddd; }
+        .nav-item { text-align: center; font-size: 0.8rem; text-decoration: none; color: #555; }
+    </style>
+</head>
+<body>
+
+  <section>
+    <div class="card">
+      <h2 class="title">Add Bank Account</h2>
+      <form method="post" action="{{ url_for('bank_account') }}">
+        <input type="text" name="bank_name" class="input-field" placeholder="Bank Name" required>
+        <input type="text" name="acc_number" class="input-field" placeholder="Account Number" required>
+        <input type="text" name="ifsc" class="input-field" placeholder="IFSC Code" required>
+        <input type="text" name="holder_name" class="input-field" placeholder="Holder Name" required>
+        <button type="submit" class="button">Submit</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2 class="title">My Linked Banks</h2>
+      {% if bank_accounts %}
+        {% for bank in bank_accounts %}
+        <div class="bank-item">
+          <strong>{{ bank.bank_name }}</strong><br>
+          Acc: {{ bank.acc_number }} | IFSC: {{ bank.ifsc }}<br>
+          <small>Holder: {{ bank.holder_name }}</small>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p>No bank accounts linked yet.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <nav class="bottom-nav">
+    <a href="{{ url_for('dashboard') }}" class="nav-item">🏠<br>Home</a>
+    <a href="{{ url_for('deposit') }}" class="nav-item">💳<br>Deposit</a>
+    <a href="{{ url_for('bank_account') }}" class="nav-item">🏛️<br>Bank</a>
+    <a href="{{ url_for('profile') }}" class="nav-item">🙋<br>Profile</a>
+  </nav>
+
+</body>
+</html>

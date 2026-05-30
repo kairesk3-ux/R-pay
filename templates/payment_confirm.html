@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Order</title>
+    <style>
+        body { font-family: sans-serif; background: #ffffff; padding: 20px; color: #000; }
+        .header { text-align: center; font-size: 1.4rem; font-weight: bold; margin-bottom: 20px; }
+        .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .blue-box { background: #000000; color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 15px; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1rem; }
+        input { width: 100%; padding: 14px; margin: 15px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        .upload-box { border: 2px dashed #9ca3af; padding: 30px; text-align: center; color: #6b7280; border-radius: 8px; margin-bottom: 20px; cursor: pointer; }
+        .submit-btn { width: 100%; padding: 15px; background: #000000; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="header">Confirm Order</div>
+    
+    <div class="card">
+        <div class="blue-box">PAY TO: {{ order.seller }}</div>
+        <div class="row"><span>Bank:</span> <span>{{ order.bank }}</span></div>
+        <div class="row"><span>Account:</span> <span>{{ order.acc }}</span></div>
+        <div class="row"><span>IFSC:</span> <span>{{ order.ifsc }}</span></div>
+        <div class="row" style="font-weight: bold; margin-top: 10px;"><span>Total to Pay:</span> <span>₹{{ order.amount }}</span></div>
+    </div>
+
+    <form method="POST">
+        <input type="text" name="utr" placeholder="Enter Transaction ID / UTR" required>
+        <div class="upload-box">Click to upload payment screenshot</div>
+        <button type="submit" class="submit-btn">Submit Order & Screenshot</button>
+    </form>
+</body>
+</html>

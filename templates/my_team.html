@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body { font-family: sans-serif; background: #f9f9f9; padding: 20px; max-width: 500px; margin: auto; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .box { background: white; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid #eee; }
+        .copy-box { background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed #33a; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <a href="/profile">← Back</a>
+    <h2>My Team</h2>
+
+    <div class="stats-grid">
+        <div class="box"><small>Total Invited</small><h3>15</h3></div>
+        <div class="box"><small>Total Earnings</small><h3>₹1,250</h3></div>
+    </div>
+
+    <p>Your Referral Link:</p>
+    <div class="copy-box">
+        <span id="refLink" style="font-size: 0.8rem;">https://yourgame.com/register?ref=20034520</span>
+        <button onclick="copyToClipboard()">Copy</button>
+    </div>
+
+    <h3 style="margin-top: 30px;">Recent Invites</h3>
+    <div class="box" style="text-align: left;">
+        <p>User_9921 - Joined 2 days ago</p>
+        <p>User_4432 - Joined 5 days ago</p>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var text = document.getElementById("refLink").innerText;
+            navigator.clipboard.writeText(text);
+            alert("Link copied!");
+        }
+    </script>
+</body>
+</html>

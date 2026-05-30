@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Account Info | R pay</title>
+  <style>
+    :root { font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%); color: #111827; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: #eef2ff; }
+    .page { padding-bottom: 120px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.25rem 0.75rem; }
+    .brand-title { margin: 0; font-size: 1.7rem; font-weight: 800; letter-spacing: -0.04em; }
+    .card { background: #ffffff; border-radius: 28px; padding: 1.35rem; margin: 0 1.25rem 1rem; box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08); border: 1px solid rgba(148, 163, 184, 0.18); }
+    .card h2 { margin: 0 0 0.75rem; font-size: 1.1rem; color: #0f172a; }
+    .field { display: grid; gap: 0.35rem; margin-bottom: 1rem; }
+    .field strong { display: block; color: #475569; font-size: 0.9rem; }
+    .field span { color: #111827; font-size: 1rem; }
+    .form-group { display: grid; gap: 0.6rem; margin-bottom: 1rem; }
+    .input-field { width: 100%; padding: 1rem; border-radius: 18px; border: 1px solid #cbd5e1; background: #f8fafc; color: #0f172a; font-size: 1rem; }
+    .button { width: 100%; border: none; border-radius: 20px; padding: 1rem; font-size: 1rem; font-weight: 700; cursor: pointer; background: #111827; color: #ffffff; }
+    .button-secondary { border: 1px solid #cbd5e1; background: #f8fafc; color: #0f172a; }
+    .alert { padding: 1rem; border-radius: 20px; margin: 0 1.25rem 1rem; background: #dcfce7; color: #14532d; border: 1px solid #86efac; }
+    .bottom-nav { position: fixed; inset-inline-start: 0; right: 0; bottom: 0; left: 0; padding: 0.9rem 1rem 1.1rem; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.5rem; background: rgba(255, 255, 255, 0.96); border-top: 1px solid rgba(148, 163, 184, 0.18); backdrop-filter: blur(16px); }
+    .nav-item { display: grid; gap: 0.4rem; place-items: center; font-size: 0.78rem; color: #475569; text-decoration: none; }
+    .nav-icon { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: #f8fafc; font-size: 1.05rem; color: #111827; }
+    .nav-item.active .nav-icon { background: #111827; color: #ffffff; }
+    @media (max-width: 420px) { .page { padding-bottom: 140px; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <h1 class="brand-title">Account Info</h1>
+      <a href="{{ url_for('me') }}" class="button button-secondary" style="text-decoration:none;">Back</a>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="alert">
+          {% for category, message in messages %}
+            <div>{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="card">
+      <h2>Account Identity</h2>
+      <div class="field"><strong>ID</strong><span>{{ user.id }}</span></div>
+      <div class="field"><strong>Phone</strong><span>{{ user.phone }}</span></div>
+      <div class="field"><strong>PIN Status</strong><span>{% if user.upi_pin_hash %}Configured{% else %}Not configured{% endif %}</span></div>
+    </div>
+
+    <div class="card">
+      <h2>Change Password</h2>
+      <form method="post">
+        <input type="hidden" name="action" value="change_password">
+        <div class="form-group">
+          <input type="password" name="current_password" placeholder="Current password" class="input-field" required>
+          <input type="password" name="new_password" placeholder="New password" class="input-field" required>
+          <input type="password" name="confirm_password" placeholder="Confirm new password" class="input-field" required>
+        </div>
+        <button type="submit" class="button">Update Password</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Reset PIN</h2>
+      <form method="post">
+        <input type="hidden" name="action" value="reset_pin">
+        <div class="form-group">
+          <input type="password" name="new_pin" maxlength="6" pattern="\d{6}" placeholder="New 6-digit PIN" class="input-field" required>
+          <input type="password" name="confirm_pin" maxlength="6" pattern="\d{6}" placeholder="Confirm PIN" class="input-field" required>
+        </div>
+        <button type="submit" class="button">Reset PIN</button>
+      </form>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="{{ url_for('dashboard') }}" class="nav-item"><span class="nav-icon">🏠</span>Home</a>
+    <a href="{{ url_for('deposit') }}" class="nav-item"><span class="nav-icon">💳</span>Deposit</a>
+    <a href="{{ url_for('upi') }}" class="nav-item"><span class="nav-icon">🧾</span>UPI</a>
+    <a href="{{ url_for('team') }}" class="nav-item"><span class="nav-icon">👥</span>Team</a>
+    <a href="{{ url_for('me') }}" class="nav-item active"><span class="nav-icon">🙋</span>Me</a>
+  </nav>
+</body>
+</html>
